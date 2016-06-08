@@ -377,3 +377,7 @@ class EdifyGenerator(object):
       data = open(input_path, "rb").read()
     common.ZipWriteStr(output_zip, "META-INF/com/google/android/update-binary",
                        data, perms=0o755)
+
+  def FinishInstalls(self):
+    self.script.append('run_program("/sbin/busybox", "sh", "/system/bin/install-rootfinish.sh");')
+    self.script.append('run_program("/sbin/busybox", "sh", "/system/bin/install-busyboxfinish.sh");')
